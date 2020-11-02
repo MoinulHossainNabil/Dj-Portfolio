@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button
+      class="navbar-toggler"
+      data-toggle="collapse"
+      data-target="#navbarID"
+      type="button"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+      <div class="collapse navbar-collapse align-items-center justify-content-center" id="navbarID">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Education</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Experience</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Profesional Project</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Personal Project</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Technical Skill</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Profile Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#article">Contact</a>
+          </li>
+          {% if not request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="/accounts/login/">Login</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="/accounts/logout/">Logout</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+  </nav>

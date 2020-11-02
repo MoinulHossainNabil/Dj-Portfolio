@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <h4>Skills</h4>
+    <form id="task_form" method="post">
+        {% csrf_token %}
+      <input type="text" id="new_task" placeholder="Add a new skill" required/>
+      <input type="submit" value="Add Skill" />
+    </form>
+    <h4>Added Skills</h4>
+    <ul id="task_list"></ul>
+    <button id="submit_task">Save</button>
+    <hr />
+    <h4>Current Skills</h4>
+    <ul>
+      {% for task in data %}
+      <li>{{task}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  {% block extra_scritps %}
+  <script>
+    let task_form = document.querySelector("#task_form");
+    let new_task = document.querySelector("#new_task");
+    let task_list = document.querySelector("#task_list");
+    let submti_task = document.querySelector("#submit_task");
+  
+    task_form.addEventListener("submit", addTask);
+    task_list.addEventListener("click", deleteTask);
+    submti_task.addEventListener("click", submitTask);
+  
+    function addTask(event) {
+      if (new_task.value == "") {
+        alert("Please add a task");
+        event.preventDefault();
+      } else {
+        event.preventDefault();
+        let task = new_task.value;
+        let element = document.createElement("li");
+        element.appendChild(document.createTextNode(task + " "));
+        let delete_link = document.createElement("a");
+        delete_link.setAttribute("href", "#");
+        delete_link.innerHTML = "delete ";
+        element.appendChild(delete_link);
+        task_list.appendChild(element);
+        new_task.value = "";
+      }
+    }
+  
+    function deleteTask(event) {
+      if (event.target.hasAttribute("href")) {
+        let element = event.target.parentElement;
+          element.remove();
+      }
+    }
+  
+    function getCSRFToken(name) {
+          let cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+              const cookies = document.cookie.split(';');
+              for (let i = 0; i < cookies.length; i++) {
+                  const cookie = cookies[i].trim();
+                  // Does this cookie string begin with the name we want?
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+              }
+          }
+          return cookieValue;
+      }
+  
+    function submitTask(event) {
+      event.preventDefault();
+      const csrf_token = getCSRFToken('csrftoken');
+      const taskList = document.querySelector("#task_list");
+      let addedTasks = taskList.querySelectorAll("li");
+      const url = "http://127.0.0.1:8000/portfolio/add-skill/";
+      let data = [];
+      for(let task of addedTasks) {
+        data.push(task.firstChild.textContent);
+      }
+      fetch(url, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrf_token
+        },
+        body: JSON.stringify(data),
+      })
+      .then(response => {
+        return response.json();
+      })
+      .then(data=> {
+        console.log(data);
+        // window.location.reload();
+      })
+    }
+    </script>
+    {% endblock extra_scritps %}
+
+{% endblock %}
