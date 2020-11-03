@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+<!--Education Section -->
+
+{% include 'profile/user_education.html' with user_education_qs=user_education title="Education" %}
+
+<!-- Experience Section -->
+
+{% include 'profile/user_experience.html' with user_experience_qs=user_experience title="Experience" %}
+
+<!-- Project Section -->
+
+{% include 'profile/user_personal_project.html' with user_personal_project_qs=user_project title="Projects" %}
+
+<!-- Skill Section -->
+
+{% include 'profile/user_skill.html' with user_skill_qs=user_skill title="Technical Skills" %}
+
+<!-- Prfile Link Section -->
+
+{% include 'profile/user_profilelink.html' with user_profilelink_qs=user_profile_link title="Profile Links" %}
+
+{% endblock content %}

@@ -1,0 +1,52 @@
+<section id="user_education">
+    <div class="container">
+        <div class="row justify-content-center">
+          {% include 'profile/title.html' with title_name=title %}
+        </div>
+        <div class="accordion" id="accordion_user_education_id">
+            <div class="row">
+                    {% for education in user_education_qs %}
+                    <div class="col-12">
+                      <div class="card col-12 p-0">
+                        <div class="card-header" id="heading_user_education_{{education.id}}">
+                          <h2 class="mb-0">
+                            <button
+                              class="btn btn-link btn-block text-left text-decoration-none"
+                              type="button"
+                              data-toggle="collapse"
+                              data-target="#collapse_user_education_{{education.id}}"
+                              aria-expanded="true"
+                              aria-controls="collapse_user_education_{{education.id}}"
+                            >
+                              {{education.degree}}
+                            </button>
+                          </h2>
+                        </div>
+                
+                        <div
+                          id="collapse_user_education_{{education.id}}"
+                          class="collapse"
+                          aria-labelledby="heading_user_education_{{education.id}}"
+                          data-parent="#accordion_user_education_id"
+                        >
+                          <div class="card-body">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum, necessitatibus. Nostrum ad quam officiis maxime, eius ullam dolores esse! Adipisci!
+                            <a href="{% url 'portfolio_app:update-education' pk=education.id %}" role="button" class="btn btn-primary">Update</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    <div class="col-12">
+                      <div class="card col-12 p-0">
+                        <div class="card-header text-center">
+                          <a class="btn btn-primary btn-lg" href="{% url 'portfolio_app:education' %}" role="button">Add New Degree</a>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  
+            </div>
+        </div>
+      </div>
+</section>

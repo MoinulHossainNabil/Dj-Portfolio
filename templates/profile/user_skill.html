@@ -1,0 +1,35 @@
+<section id="user_skill">
+    <div class="container">
+        <div class="row justify-content-center">
+            {% include 'profile/title.html' with title_name=title %}
+          </div>
+          <div class="row">
+              {% for skill in user_skill_qs %}
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                  <div class="card-header bg-dark mb-1 text-light align-items-center justify-content-around">
+                      <div class="row">
+                          <div class="col-md-8">
+                            <p class="text-white text-monospace font-weight-normal">{{skill.skill}}</p>
+                          </div>
+                          <div class="col-md-4 ml-auto">
+                            <a href="{% url 'portfolio_app:delete-skill' pk=skill.id %}" class="badge badge-danger ml-auto mb-1 p-2">Delete</a>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-12 mt-4">
+                <div class="card col-8 p-0 m-auto">
+                    <div class="card-header bg-dark text-center text-light">
+                      <a class="btn bg-dark btn-lg text-light" href="{% url 'portfolio_app:skill' %}" role="button">
+                          Add New Skill
+                      </a>
+                    </div>
+                  </div>
+            </div>
+            
+          </div>
+    </div>
+</section>

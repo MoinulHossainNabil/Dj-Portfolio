@@ -53,7 +53,8 @@ class ProjectForm(forms.ModelForm):
             'used_technologies',
             'description',
             'project_link',
-            'code_link'
+            'code_link',
+            'image'
         )
 
 
