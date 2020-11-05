@@ -1,0 +1,29 @@
+{% load date_difference %}
+<section id="Experience" class="content-section">
+    <div class="container">
+        <div class="row">
+            {% include 'heading.html' with title_name="Experience" icon="fa-user-md" %}
+          </div>
+          <div class="row">
+              {% for experience in experience_qs %}
+            <div class="card col-md-8 mb-2">
+              <div class="card-body">
+                <p class="card-title">
+                    <strong class="font-weigth-bold"
+                    >{{experience.role}} ({{experience.started_work_from|date}} - {{experience.worked_till|date}})</strong>
+                </p>
+                <p class="card-title">
+                  Expereince Year(s): <strong>{{experience.worked_till|calculate_date_difference:experience.started_work_from}}</strong>
+                </p>
+                <p class="card-title">
+                  Company:
+                  <strong class="font-weigth-bold"
+                    >{{experience.company_name}}</strong
+                  >
+                </p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+    </div>
+</section>

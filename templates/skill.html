@@ -1,0 +1,22 @@
+<style>
+    .skill {
+        font-size: large !important;
+    }
+</style>
+<section id="TechnicalSkill" class="content-section">
+    <div class="container">
+        <div class="row">
+            {% include 'heading.html' with title_name="Technical Skill" icon="fa-user-secret" %}
+        </div>
+        <div class="row">
+            {% for skill in skill_qs %}
+          <div class="col-sm-6 col-md-4 col-lg-3 m-0 p-0">
+              <div class="card">
+                <div class="card-header d-flex bg-dark mb-1 text-light align-items-center justify-content-around">
+                    <p class="text-white text-monospace font-weight-normal skill">{{skill.skill}}</p>
+                </div>
+              </div>
+          </div>
+          {% endfor %}
+    </div>
+</section>

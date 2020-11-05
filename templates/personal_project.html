@@ -1,0 +1,126 @@
+<style>
+  .project-image {
+    width: 100% !important;
+    max-height: 200px !important;
+    object-fit: cover !important;
+  }
+  .project-card:hover {
+    /* first is X where +X is right and -X left */
+    /* second is Y where +Y is down and -Y up */
+    /* four is for color/shadow spreading area */
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.5);
+  }
+  .modal-link {
+    background-color: transparent;
+    box-shadow: none;
+    border-bottom: 2px solid #e22c2f;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-radius: 0;
+    color: #222;
+    font-size: 15px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    padding: 16px 0 6px;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+</style>
+<section id="PersonalProject" class="content-section">
+  <div class="container">
+    <div class="row">
+      {% include 'heading.html' with title_name="Personal Project" icon="fa-briefcase" %}
+    </div>
+    <div class="row">
+      {% for project in personal_project_qs %}
+      <div
+        class="col-sm-12 col-md-6 mb-3 pl-0"
+      >
+        <div class="card project-card text-center">
+          <div class="card-header">
+            <h4 class="lead m-auto text-capitalize">{{project.title}}</h4>
+          </div>
+          {% if project.image.url %}
+          <img
+            src="{{project.image.url}}"
+            alt="Project Image"
+            class="card-img-top img-fluid border project-image"
+          />
+          {% endif %}
+          <div class="card-body">
+            <h5 class="lead card-title">Tehcnologies</h5>
+            <p
+              class="lead font-weight-normal card-text p-0 m-0 text-capitalize"
+            >
+              {{project.used_technologies}}
+            </p>
+            <div class="mt-2">
+                <a
+              data-toggle="modal"
+              data-target="#project-modal-{{project.id}}"
+              class="mt-5 card-text text-decoration-none text-black modal-link mx-2"
+              style="cursor: pointer;"
+            >
+              View Description
+            </a>
+            <a
+              class="mt-5 card-text text-decoration-none text-black modal-link"
+              href="{{project.code_link|default:'javascript:;'}}"
+              target="_blank"
+              style="cursor: pointer;"
+            >
+              Source Code
+            </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div
+          class="modal fade bd-example-modal-lg"
+          id="project-modal-{{project.id}}"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="myLargeModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="container">
+                <div class="row mt-3 px-2">
+                  <div>
+                    <h4>{{project.title}}</h4>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore, nihil?
+                    </p>
+                  </div>
+                </div>
+                <div class="row mt-3 px-2">
+                  <div>
+                    <h4>Technologies Used</h4>
+                    <p>{{project.used_technologies}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <!-- <button type="button" class="btn btn-primary">Send message</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+</section>
