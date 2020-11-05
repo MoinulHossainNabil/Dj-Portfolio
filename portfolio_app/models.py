@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.shortcuts import reverse
+from django.db.models import signals
 
 CGPA_OUT_OF = (
     ('Four', '4.0'),
@@ -16,10 +17,36 @@ PROJECT_TYPE = (
 def upload_project_image_to(instance, file_name):
     return f"{instance.project_type}/{instance.title}/{file_name}"
 
+def upload_user_image_to(instance,file_name):
+    return f"profile_photos/{instance.user.username}/{file_name}"
+
+
+def upload_user_resume_to(instance, file_name):
+    return f"resumes/{instance.user.username}/{file_name}"
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=50, null=True, blank=True)
+    last_name = models.CharField(max_length=50, null=True, blank=True)
+    address = models.TextField(null=True, blank=True)
+    phone_number = models.BigIntegerField(null=True, blank=True)
+    photo = models.ImageField(null=True, blank=True, upload_to=upload_user_image_to)
+    resume = models.FileField(null=True, blank=True, upload_to=upload_user_resume_to)
+    date_of_birth = models.DateTimeField(null=True, blank=True)
+    about = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username
+
+    def get_absolute_url(self):
+        return reverse("portfolio_app:profile")
+
 
 class Education(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='persons_education')
     degree = models.CharField(max_length=100, null=True)
+    major = models.CharField(max_length=60, null=True)
     institute = models.CharField(max_length=100)
     pass_year = models.PositiveIntegerField()
     cgpa = models.DecimalField(max_digits=3, decimal_places=2)
@@ -85,3 +112,10 @@ class ProfileLink(models.Model):
     def get_absolute_url(self):
         return reverse('portfolio_app:profile')
 
+
+def create_user_profile_by_signals(sender, instance, created, *args, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+
+signals.post_save.connect(create_user_profile_by_signals, sender=settings.AUTH_USER_MODEL)

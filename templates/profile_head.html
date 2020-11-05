@@ -1,0 +1,89 @@
+<style>
+  .profile-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+  }
+  .profile-info {
+    background-color: #434e5e;
+  }
+  .profile-info a {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: transparent;
+    font-size: large;
+  }
+  .profile-logo {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: transparent;
+  }
+  .profile-info .fa {
+    font-size: 1.5rem;
+  }
+  .link-list a {
+    text-decoration: none;
+  }
+  @media only screen and (max-width: 768px) {
+    .personal-info-head {
+        padding-top: 20px;
+    }
+  }
+  @media only screen and (max-width:311px) {
+      .name-profile-head, .role-profile-head {
+          font-size: 1.45rem;
+      }
+  }
+</style>
+<section id="ProfileLink" class="content-section">
+  <!-- <div class="container"> -->
+  <div class="row profile-info p-4 justify-content-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+            {% if profile_qs.photo %}
+            <img src="{{profile_qs.photo.url}}" alt="" class="img-fluid profile-image">
+            {% endif %}
+        </div>
+        <div class="col-md-5 d-flex flex-column justify-content-center text-white px-0 pl-2 mx-0 personal-info-head">
+          <!-- <h1 class="lead">{{profile_qs.user.username}}</h1> -->
+          <h3 class="name-profile-head">Moinul Hossain Nabil</h1>
+
+          <h3 class="role-profile-head">Sotware Engineer</h3>
+          <ul class="list-unstyled pt-2">
+            {% if profile_qs.address %}
+            <li>
+              <a href="" class="text-decoration-none">
+                <i class="fa fa-home"></i>&nbsp; {{profile_qs.address}}
+              </a>
+            </li>
+            {% endif %}
+            
+              {% if profile_qs.user.user.email %}
+            <li>
+              <a href="" class="text-decoration-none">
+                <i class="fa fa-envelope"></i>&nbsp; nnaabiill@gmail.com
+              </a>
+            </li>
+            {% endif %}
+            {% if profile_qs.phone_number %}
+            <li>
+              <a href="" class="text-decoration-none">
+                <i class="fa fa-volume-control-phone"></i>&nbsp; 01631848044
+              </a>
+            </li>
+            {% endif %}
+            <ul class="list-unstyled d-flex flex-column justify-content-center">
+                {% if profile_link_qs %} {% for link in profile_link_qs %}
+                <li>
+                  <a href="{{link.link}}" class="profile-link">
+                    {{link.link}}
+                  </a>
+                </li>
+                {% endfor %} {% endif %}
+              </ul>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
+</section>

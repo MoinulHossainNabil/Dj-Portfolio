@@ -5,6 +5,8 @@
     {% block navbar%}
     {% include 'navbar.html' %}
     {% endblock %}
+    {% block account_block %}
+    {% endblock account_block %}
     <body>
       {% if messages %}
       <div class="mt-3 pt-2" id="message-div">
@@ -29,9 +31,12 @@
         {% block extra_scripts %}
         <script>
           const message = document.getElementById("message-close")
-          message.addEventListener("click", function() {
+          if(message) {
+            message.addEventListener("click", function() {
             document.getElementById("message-div").style.display = "none";
           })
+          }
+          
         </script>
         {% endblock extra_scripts %}
 

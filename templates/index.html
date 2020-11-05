@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 {% load date_difference %}
 {% block content %}
+
     <div class="container-fluid">
-        <!-- Profile Link Section -->
+
+        <!-- Profile Head Section -->
 
         {% if has_profile_link %}
-        {% include 'profile_link.html'  with profile_link_qs=profile_link %}
+        {% include 'profile_head.html'  with profile_link_qs=profile_link profile_qs=profile %}
+        {% else %}
+        {% include 'profile_head.html' with profile_qs=profile %}
         {% endif %}
 
         <!-- About Section -->
 
+        {% if profile.about %}
         {% include 'about.html' %}
-        
+        {% endif %}
+
         <!-- Education Section -->
 
         {% if has_education %}
@@ -22,6 +28,12 @@
 
         {% if has_experience %}
         {% include 'experience.html' with experience_qs=experience %}
+        {% endif %}
+
+        <!-- Professional Project Section-->
+
+        {% if has_professional_project %}
+        {% include 'professional_project.html'  with professional_project_qs=professional_project %}
         {% endif %}
 
         <!-- Personal Project Section-->

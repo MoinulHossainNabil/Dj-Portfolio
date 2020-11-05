@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import (
+    UserProfile,
     Education,
     Experience,
     Skill,
@@ -7,6 +8,7 @@ from .models import (
     ProfileLink
 )
 
+admin.site.register(UserProfile)
 admin.site.register(Education)
 admin.site.register(Experience)
 admin.site.register(Skill)

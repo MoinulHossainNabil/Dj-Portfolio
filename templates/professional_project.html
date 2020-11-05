@@ -1,0 +1,75 @@
+<section id="ProfessionalProject" class="content-section">
+    <div class="container">
+        <div class="row">
+            {% include 'heading.html' with title_name="Pofessional Work" icon="fa-wheelchair" %}
+        </div>
+        <div class="row">
+            {% for project in professional_project_qs %}
+            <div class="col-md-6 mb-3 pl-0">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4 class="lead text-capitalize">
+                        {{project.title}}
+                        </h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <h4 class="card-title lead text-capitalize">Key Technologies</h4>
+                        {% if project.used_technologies %}
+                        <p class="lead font-weight-normal card-text pt-1 m-0 text-capitalize">{{project.used_technologies}}</p>
+                        {% endif %}
+                        {% if not project.used_technologies %}
+                        <p class="lead font-weight-normal card-text pt-1 m-0 text-capitalize">Not Available</p>
+                        {% endif %}
+                        {% if project.description %}
+                        <a role="button" class="btn btn-outline-primary btn-md px-2 mt-2" data-toggle="modal" data-target="#project-modal-{{project.id}}">
+                            View Description
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        <!-- Description Modal -->
+        <div
+        class="modal fade bd-example-modal-lg"
+        id="project-modal-{{project.id}}"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myLargeModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="container">
+              <div class="row mt-3 px-2">
+                <div>
+                  <h4>{{project.title}}</h4>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore, nihil?
+                  </p>
+                </div>
+              </div>
+              <div class="row mt-3 px-2">
+                <div>
+                  <h4>Technologies Used</h4>
+                  <p>{{project.used_technologies}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <!-- <button type="button" class="btn btn-primary">Send message</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

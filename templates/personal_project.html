@@ -66,14 +66,24 @@
             >
               View Description
             </a>
+            {% if project.code_link %}
             <a
               class="mt-5 card-text text-decoration-none text-black modal-link"
-              href="{{project.code_link|default:'javascript:;'}}"
+              href="{{project.code_link}}"
               target="_blank"
               style="cursor: pointer;"
             >
               Source Code
             </a>
+            {% else %}
+            <a
+              class="mt-5 card-text text-decoration-none text-black modal-link"
+              href="#"
+              style="cursor: pointer;"
+            >
+              Source Code
+            </a>
+            {% endif %}
             </div>
           </div>
         </div>

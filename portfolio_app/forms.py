@@ -1,5 +1,20 @@
 from django import forms
-from .models import Education, Experience, Skill, Project, ProfileLink
+from .models import UserProfile, Education, Experience, Skill, Project, ProfileLink
+
+
+class UserProfileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['address'].widget.attrs.update({"rows": "5"})
+        self.fields['date_of_birth'].widget.attrs.update({"placeholder": "example format: YY-MM-DD, i.e 2001-01-01"})
+        self.fields['phone_number'].widget.attrs.update({"placeholder": "example format: 01775418459 dont't use + sign"})    
+    
+    class Meta:
+        model = UserProfile
+        fields = ('first_name', 'last_name', 'address',
+                  'address', 'phone_number', 'photo', 'resume',
+                  'date_of_birth', 'about',
+                  )
 
 
 class EducationForm(forms.ModelForm):

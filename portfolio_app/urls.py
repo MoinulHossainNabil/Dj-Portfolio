@@ -9,11 +9,11 @@ from .views import (
     AddSkillView,
     AddProjectView,
     AddProfileLinkView,
+    UpdateUserProfileView,
     UpdateEducationView,
     UpdateExperienceView,
     UpdateProjectView,
     UpdateProfileLinkView,
-    DeleteSkillView,
     delete_skill
 )
 
@@ -28,10 +28,10 @@ urlpatterns = [
     path('add-skill/', AddSkillView.as_view(), name='skill'),
     path('add-project/', AddProjectView.as_view(), name='project'),
     path('add-profilelink/', AddProfileLinkView.as_view(), name='profilelink'),
+    path('update-userprofile/<int:pk>/', UpdateUserProfileView.as_view(), name="update-userprofile"),
     path('update-education/<int:pk>/', UpdateEducationView.as_view(), name='update-education'),
     path('update-experience/<int:pk>/', UpdateExperienceView.as_view(), name='update-experience'),
     path('update-project/<int:pk>/', UpdateProjectView.as_view(), name='update-project'),
     path('update-profilelink/<int:pk>/', UpdateProfileLinkView.as_view(), name='update-profilelink'),
-    # path('delete-skill/<int:pk>/', DeleteSkillView.as_view(), name='delete-skill'),
     path('delete-skill/<int:pk>/', delete_skill, name='delete-skill'),
 ]
