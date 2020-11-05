@@ -8,11 +8,6 @@
   />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <title>{% block head_title %}{% endblock %}</title>
-  <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-  />
   <link
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -23,8 +18,11 @@
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
   />
-  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
+    rel="stylesheet"
+  />
+
   {% block extra_head %} {% endblock %}
   <style>
     .navbar {
@@ -32,16 +30,26 @@
       top: 0 !important;
       z-index: 10 !important;
     }
+    .navbar a:hover {
+      font-weight: bold;
+      font-size: medium;
+    }
     section {
       margin-bottom: 50px;
     }
     body {
-    font-family: "Quicksand", Arial, Helvetica, sans-serif;
-    font-weight: 500;
-    font-size: 15px;
-    line-height: 1.8;
-    color: rgba(0, 0, 0, 0.7);
-    background-color: #fff;
-}
+      font-family: "Quicksand", Arial, Helvetica, sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(0, 0, 0, 0.7);
+      background-color: #fff;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    .content-section {
+      margin-bottom: 5rem;
+    }
   </style>
 </head>

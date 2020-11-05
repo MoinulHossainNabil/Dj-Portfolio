@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View, CreateView, UpdateView, DeleteView
 from django.http import JsonResponse
+from django.contrib.auth.models import User
 from .models import (
     Education,
     Experience,
@@ -25,8 +26,61 @@ from .forms import (
 
 
 class HomeView(View):
+    @staticmethod
+    def has_section(qs):
+        return qs.exists()
+
     def get(self, *args, **kwargs):
-        return render(self.request, 'index.html')
+        user = str(self.request.user)
+        context = {}
+        if user == "AnonymousUser":
+            user = 1
+        else:
+            user = self.request.user
+        education_qs = Education.objects.filter(user=user)
+        experience_qs = Experience.objects.filter(user=user)
+        personal_project_qs = Project.objects.filter(user=user, project_type="P2")
+        skill_qs = Skill.objects.filter(user=user)
+        profile_link_qs = ProfileLink.objects.filter(user=user)
+        context['has_education'] = self.has_section(education_qs)
+        context['has_experience'] = self.has_section(experience_qs)
+        context['has_personal_project'] = self.has_section(personal_project_qs)
+        context['has_profile_link'] = self.has_section(profile_link_qs)
+        context['has_skill'] = self.has_section(skill_qs)
+        context['education'] = education_qs
+        context['experience'] = experience_qs
+        context['personal_project'] = personal_project_qs
+        context['skill'] = skill_qs
+        context['profile_link'] = profile_link_qs
+        return render(self.request, 'index.html', context)
+
+
+class UserHomeView(View):
+    def get(self, *args, **kwargs):
+        context = {}
+        user_object = User.objects.filter(username=kwargs.get('user_name'))
+        if user_object.exists():
+            user = user_object[0]
+            education_qs = Education.objects.filter(user__username=user)
+            experience_qs = Experience.objects.filter(user__username=user)
+            personal_project_qs = Project.objects.filter(user__username=user, project_type="P2")
+            skill_qs = Skill.objects.filter(user__username=user)
+            profile_link_qs = ProfileLink.objects.filter(user__username=user)
+            context['has_education'] = HomeView.has_section(education_qs)
+            context['has_experience'] = HomeView.has_section(experience_qs)
+            context['has_personal_project'] = HomeView.has_section(personal_project_qs)
+            context['has_skill'] = HomeView.has_section(skill_qs)
+            context['has_profile_link'] = HomeView.has_section(profile_link_qs)
+            context['education'] = education_qs
+            context['experience'] = experience_qs
+            context['personal_project'] = personal_project_qs
+            context['skill'] = skill_qs
+            context['profile_link'] = profile_link_qs
+
+        else:
+            messages.warning(self.request, "User does not exist")
+            return redirect('portfolio_app:home')
+        return render(self.request, 'index.html', context)
 
 
 class UserProfileView(View):
@@ -86,7 +140,7 @@ class AddSkillView(LoginRequiredMixin, View):
         return JsonResponse(response, safe=False)
 
     def get(self, *args, **kwargs):
-        data = Skill.objects.order_by('-id')
+        data = Skill.objects.filter(user=self.request.user).order_by('-id')
         return render(self.request, 'skill_form.html', {"data": data})
 
 

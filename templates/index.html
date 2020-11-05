@@ -1,4 +1,41 @@
 {% extends 'base.html' %}
+{% load date_difference %}
 {% block content %}
-<h4>Welcome to homepage</h4>
+    <div class="container-fluid">
+        <!-- Profile Link Section -->
+
+        {% if has_profile_link %}
+        {% include 'profile_link.html'  with profile_link_qs=profile_link %}
+        {% endif %}
+
+        <!-- About Section -->
+
+        {% include 'about.html' %}
+        
+        <!-- Education Section -->
+
+        {% if has_education %}
+        {% include 'education.html' with education_qs=education %}
+        {% endif %}
+
+        <!-- Experience Section -->
+
+        {% if has_experience %}
+        {% include 'experience.html' with experience_qs=experience %}
+        {% endif %}
+
+        <!-- Personal Project Section-->
+
+        {% if has_personal_project %}
+        {% include 'personal_project.html'  with personal_project_qs=personal_project %}
+        {% endif %}
+
+        <!-- Skill Section-->
+
+        {% if has_skill %}
+        {% include 'skill.html'  with skill_qs=skill %}
+        {% endif %}
+
+    </div>
+
 {% endblock content %}

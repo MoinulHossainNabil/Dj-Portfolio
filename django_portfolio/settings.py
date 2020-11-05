@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'portfolio_app',
     'crispy_forms',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +111,7 @@ USE_TZ = True
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = '/portfolio/'
+LOGIN_REDIRECT_URL = '/portfolio/user_profile'
 
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login'
 
