@@ -27,6 +27,20 @@
     text-decoration: none;
     text-transform: capitalize;
 }
+.project-card {
+  position: relative;
+}
+.view-project-button {
+  position: absolute;
+  top: 40%;
+  left: 37%;
+}
+.view-project-button {
+  display: none;
+}
+.project-card:hover + .view-project-button, .view-project-button:hover  {
+  display: inline-block;
+}
 
 </style>
 <section id="PersonalProject" class="content-section">
@@ -37,7 +51,7 @@
     <div class="row">
       {% for project in personal_project_qs %}
       <div
-        class="col-sm-12 col-md-6 mb-3 pl-0"
+        class="col-sm-12 col-md-6 mb-3 pl-0 project-column"
       >
         <div class="card project-card text-center">
           <div class="card-header">
@@ -76,18 +90,51 @@
               Source Code
             </a>
             {% else %}
+            {% with message_code="No source code available" %}
             <a
               class="mt-5 card-text text-decoration-none text-black modal-link"
-              href="#"
               style="cursor: pointer;"
+              data-toggle="modal"
+              data-target="#noSourceCodeOf{{project.id}}"
             >
               Source Code
             </a>
+
+            <div
+          class="modal fade bd-example-modal-lg"
+          id="noSourceCodeOf{{project.id}}"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="myLargeModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-md">
+            <div class="modal-content">
+              <div class="container">
+                    <h4 class="lead pt-5">{{message_code}}</h4>
+              </div>
+              <div class="modal-footer border-0">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <!-- <button type="button" class="btn btn-primary">Send message</button> -->
+              </div>
+            </div>
+          </div>
+          {% endwith %}
+        </div>
+
             {% endif %}
             </div>
           </div>
         </div>
-
+        {% if project.project_link %}
+        <a class="btn btn-danger btn-md px-4 view-project-button" href="{{project.project_link}}" role="button">View Project</a>
+        {% endif %}
         <!-- Modal -->
         <div
           class="modal fade bd-example-modal-lg"
