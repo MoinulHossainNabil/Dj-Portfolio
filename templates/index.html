@@ -15,7 +15,7 @@
         <!-- About Section -->
 
         {% if profile.about %}
-        {% include 'about.html' %}
+        {% include 'about.html' with about=profile.about%}
         {% endif %}
 
         <!-- Education Section -->

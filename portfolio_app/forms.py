@@ -20,14 +20,15 @@ class UserProfileForm(forms.ModelForm):
 class EducationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['degree'].widget.attrs.update({"placeholder": "Enter degree with major"})
+        self.fields['degree'].widget.attrs.update({"placeholder": "Enter degree"})
+        self.fields['major'].widget.attrs.update({"placeholder": "Enter major"})
         self.fields['institute'].widget.attrs.update({"placeholder": "Enter institution name"})
         self.fields['pass_year'].widget.attrs.update({"placeholder": "Enter passing year"})
         self.fields['cgpa'].widget.attrs.update({"placeholder": "Enter cgpa"})
 
     class Meta:
         model = Education
-        fields = ('degree', 'institute', 'pass_year', 'cgpa', 'out_of',)
+        fields = ('degree', 'major', 'institute', 'pass_year', 'cgpa', 'out_of',)
 
 
 class ExperienceForm(forms.ModelForm):

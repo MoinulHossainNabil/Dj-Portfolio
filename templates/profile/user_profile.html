@@ -2,6 +2,11 @@
 {% block extra_head %}
 {% endblock %}
 {% block content %}
+
+<!--Personal Information -->
+
+{% include 'profile/user_personal_info.html'  with user_profile_qs=user_profile title="Personal Information"%}
+
 <!--Education Section -->
 
 {% include 'profile/user_education.html' with user_education_qs=user_education title="Education" %}
