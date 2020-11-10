@@ -11,34 +11,73 @@
       <div class="collapse navbar-collapse align-items-center justify-content-center" id="navbarID">
         <ul class="navbar-nav">
           {% if not request.user.is_authenticated %}
+          {% if profile.about %}
           <li class="nav-item">
             <a class="nav-link" href="#About">About</a>
           </li>
+          {% endif %}
+          {% if education %}
           <li class="nav-item">
             <a class="nav-link" href="#Education">Education</a>
           </li>
+          {% endif %}
+          {% if experience %}
           <li class="nav-item">
             <a class="nav-link" href="#Experience">Experience</a>
           </li>
+          {% endif %}
+          {% if professional_project %}
           <li class="nav-item">
             <a class="nav-link" href="#ProfessionalProject">Profesional Project</a>
           </li>
+          {% endif %}
+          {% if personal_project %}
           <li class="nav-item">
             <a class="nav-link" href="#PersonalProject">Personal Project</a>
           </li>
+          {% endif %}
+          {% if skill %}
           <li class="nav-item">
             <a class="nav-link" href="#TechnicalSkill">Technical Skill</a>
           </li>
+          {% endif %}
           <li class="nav-item">
-            <a class="nav-link" href="#ProfileLink">Profile Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#Contact">Contact</a>
+            <a class="nav-link" role="button" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="pointer-events: cursor;">Contact</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/accounts/login/">Sign In</a>
           </li>
           {% else %}
+          {% if profile.about %}
+          <li class="nav-item">
+            <a class="nav-link" href="#About">About</a>
+          </li>
+          {% endif %}
+          {% if education %}
+          <li class="nav-item">
+            <a class="nav-link" href="#Education">Education</a>
+          </li>
+          {% endif %}
+          {% if experience %}
+          <li class="nav-item">
+            <a class="nav-link" href="#Experience">Experience</a>
+          </li>
+          {% endif %}
+          {% if professional_project %}
+          <li class="nav-item">
+            <a class="nav-link" href="#ProfessionalProject">Profesional Project</a>
+          </li>
+          {% endif %}
+          {% if personal_project %}
+          <li class="nav-item">
+            <a class="nav-link" href="#PersonalProject">Personal Project</a>
+          </li>
+          {% endif %}
+          {% if skill %}
+          <li class="nav-item">
+            <a class="nav-link" href="#TechnicalSkill">Technical Skill</a>
+          </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="/portfolio/">{{request.user.username|capfirst}}</a>
           </li>

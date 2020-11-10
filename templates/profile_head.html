@@ -43,11 +43,16 @@
             <img src="{{profile_qs.photo.url}}" alt="" class="img-fluid profile-image">
             {% endif %}
         </div>
-        <div class="col-md-5 d-flex flex-column justify-content-center text-white px-0 pl-2 mx-0 personal-info-head">
+        <div class="col-md-9 d-flex flex-column justify-content-center text-white px-0 pl-2 mx-0 personal-info-head">
           <!-- <h1 class="lead">{{profile_qs.user.username}}</h1> -->
-          <h3 class="name-profile-head">Moinul Hossain Nabil</h1>
-
-          <h3 class="role-profile-head">Software Engineer</h3>
+          {% if profile_qs.first_name and profile_qs.last_name %}
+          <h3 class="name-profile-head">{{profile_qs.first_name}} {{profile_qs.last_name}}</h1>
+            {% else %}
+          <h3 class="name-profile-head">{{profile_qs.user.username}}</h1>
+            {% endif %}
+          {% if profile_qs.profession %}
+          <h3 class="role-profile-head">{{profile_qs.profession}}</h3>
+          {% endif %}
           <ul class="list-unstyled pt-2">
             {% if profile_qs.address %}
             <li>
@@ -57,10 +62,10 @@
             </li>
             {% endif %}
             
-              {% if profile_qs.user.user.email %}
+              {% if profile_qs.user.email %}
             <li>
               <a href="" class="text-decoration-none">
-                <i class="fa fa-envelope"></i>&nbsp; nnaabiill@gmail.com
+                <i class="fa fa-envelope"></i>&nbsp; {{profile_qs.user.email}}
               </a>
             </li>
             {% endif %}
@@ -75,7 +80,7 @@
                 {% if profile_link_qs %} {% for link in profile_link_qs %}
                 <li>
                   <a href="{{link.link}}" class="profile-link">
-                    {{link.link}}
+                    <i class="fa fa-globe"></i>&nbsp;{{link.link}}
                   </a>
                 </li>
                 {% endfor %} {% endif %}

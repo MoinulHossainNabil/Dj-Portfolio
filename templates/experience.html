@@ -12,15 +12,14 @@
                     <strong class="font-weigth-bold"
                     >{{experience.role}} ({{experience.started_work_from|date}} - {{experience.worked_till|date}})</strong>
                 </p>
-                <p class="card-title">
+                <!-- <p class="card-title">
                   Expereince Year(s): <strong>{{experience.worked_till|calculate_date_difference:experience.started_work_from}}</strong>
-                </p>
+                </p> -->
                 <p class="card-title">
-                  Company:
-                  <strong class="font-weigth-bold"
-                    >{{experience.company_name}}</strong
-                  >
+                  <strong class="font-weigth-bold">Company: </strong>{{experience.company_name}}
                 </p>
+                  <strong class="font-weigth-bold">Description : </strong>
+                  {{experience.work_description|truncatewords:100}}
               </div>
             </div>
             {% endfor %}

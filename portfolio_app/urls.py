@@ -14,7 +14,8 @@ from .views import (
     UpdateExperienceView,
     UpdateProjectView,
     UpdateProfileLinkView,
-    delete_skill
+    delete_skill,
+    SendEmailView
 )
 
 app_name = 'portfolio_app'
@@ -34,4 +35,5 @@ urlpatterns = [
     path('update-project/<int:pk>/', UpdateProjectView.as_view(), name='update-project'),
     path('update-profilelink/<int:pk>/', UpdateProfileLinkView.as_view(), name='update-profilelink'),
     path('delete-skill/<int:pk>/', delete_skill, name='delete-skill'),
+    path('send-email/', SendEmailView.as_view(), name="send-email"),
 ]

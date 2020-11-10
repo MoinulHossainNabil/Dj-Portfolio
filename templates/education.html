@@ -1,3 +1,11 @@
+<style>
+  .accordion .card-header h2 button {
+    box-shadow: none;
+  }
+  .accordion .card-header h2 .btn .fa {
+    float: right;
+  }
+</style>
 <section id="Education" class="content-section">
   <div class="container">
     <div class="row">
@@ -8,20 +16,19 @@
         {% for education in education_qs %}
         <div class="col-md-10 mx-0 px-0">
           <div class="card col-12 p-0">
-            <div
-              class="card-header"
-              id="heading_education_{{education.id}}"
-            >
+            <div class="card-header" id="heading_education_{{education.id}}" style="border-bottom: 0;">
               <h2 class="mb-0">
                 <button
-                  class="btn btn-link btn-block text-left text-decoration-none"
+                  class="btn btn-link btn-block text-left text-decoration-none text-dark"
                   type="button"
                   data-toggle="collapse"
                   data-target="#collapse_education_{{education.id}}"
                   aria-expanded="true"
                   aria-controls="collapse_education_{{education.id}}"
+                  style="font-size: large;"
                 >
                   {{education.degree}}
+                  <i class="fa fa-chevron-down"></i>
                 </button>
               </h2>
             </div>
@@ -33,15 +40,28 @@
               data-parent="#accordion_education_id"
             >
               <div class="card-body">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Laborum, necessitatibus. Nostrum ad quam officiis maxime, eius
-                ullam dolores esse! Adipisci!
-                <a
-                  href="{% url 'portfolio_app:update-education' pk=education.id %}"
-                  role="button"
-                  class="btn btn-primary"
-                  >Update</a
-                >
+                <p class="card-title">
+                  Major: <strong>{{education.major}}</strong>
+                </p>
+                <p class="card-title">
+                  Institue:
+                  <strong class="font-weigth-bold"
+                    >{{education.institute}}</strong
+                  >
+                </p>
+                <p class="card-title">
+                  Pass Year
+                  <strong class="font-weigth-bold"
+                    >{{education.pass_year}}</strong
+                  >
+                </p>
+                <p class="card-title">
+                  Result:
+                  <strong class="font-weigth-bold"
+                    >{{education.cgpa}} out of
+                    {{education.get_out_of_display}}</strong
+                  >
+                </p>
               </div>
             </div>
           </div>
@@ -51,3 +71,4 @@
     </div>
   </div>
 </section>
+

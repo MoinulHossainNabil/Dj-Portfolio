@@ -5,9 +5,9 @@
   <div class="row mb-3">
     <div class="col-lg-8 m-auto">
       {% if  form.instance.pk%}
-      <h4 class="text-center">Update Project</h4>
+      <h4 class="text-center form-heading">Update Project</h4>
       {% else %}
-      <h4 class="text-center">Add Project</h4>
+      <h4 class="text-center form-heading">Add Project</h4>
       {% endif %}
         <form class="form" method="post" enctype="multipart/form-data">
           {% csrf_token %}

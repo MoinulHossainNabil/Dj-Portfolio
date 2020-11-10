@@ -12,7 +12,7 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('first_name', 'last_name', 'address',
-                  'address', 'phone_number', 'photo', 'resume',
+                  'address', 'phone_number', 'photo', 'profession', 'resume',
                   'date_of_birth', 'about',
                   )
 
@@ -39,7 +39,7 @@ class ExperienceForm(forms.ModelForm):
 
     class Meta:
         model = Experience
-        fields = ('company_name', 'role', 'started_work_from', 'worked_till')
+        fields = ('company_name', 'role', 'work_description', 'started_work_from', 'worked_till')
 
 
 class SkillForm(forms.ModelForm):

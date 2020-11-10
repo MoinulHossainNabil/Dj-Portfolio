@@ -1,5 +1,6 @@
 import json
 from django.shortcuts import render, redirect
+from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
@@ -34,7 +35,7 @@ class HomeView(View):
 
     def get(self, *args, **kwargs):
         user = str(self.request.user)
-        user_profile_qs = None
+        profile_qs = None
         context = {}
         if user == "AnonymousUser":
             user = 1
@@ -247,3 +248,20 @@ def delete_skill(request, pk):
     except ObjectDoesNotExist:
         messages.warning(request, "Opps!! The object does not exist")
         return redirect('portfolio_app:profile')
+
+
+class SendEmailView(View):
+    def post(self, *args, **kwargs):
+        sender = self.request.POST['email']
+        receiver = self.request.POST['user_email']
+        subject = "Portfolio Email"
+        message = self.request.POST['message'] + "\n" + f"from email {sender}"
+        send_mail(
+            subject,
+            message,
+            sender,
+            [receiver],
+            fail_silently=False
+        )
+        return JsonResponse({"message": "Email has been sent successfully!!"})
+

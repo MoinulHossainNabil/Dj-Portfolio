@@ -6,7 +6,9 @@
     <div class="row border">
         <div class="col-md-12">
             <div class="media pt-3">
-                <img src="../../media/profile_photos/nabil/jpegbase64efd8612170d6b09.jpg" alt="" class="img-fluid" style="max-width: 150px; max-height: 150px; object-fit: cover;">
+              {% if user_profile_qs.photo %}
+                <img src="{{user_profile_qs.photo.url}}" alt="" class="img-fluid" style="max-width: 150px; max-height: 150px; object-fit: cover;">
+              {% endif %}
                 <div class="media-body pl-5">
                     <h4>Name: {{user_profile_qs.user.username}}</h4>
                     <p>Address: {{user_profile_qs.address}}</p>

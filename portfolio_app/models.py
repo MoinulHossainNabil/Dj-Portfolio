@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.shortcuts import reverse
 from django.db.models import signals
+from ckeditor.fields import RichTextField
 
 CGPA_OUT_OF = (
     ('Four', '4.0'),
@@ -17,6 +18,7 @@ PROJECT_TYPE = (
 def upload_project_image_to(instance, file_name):
     return f"{instance.project_type}/{instance.title}/{file_name}"
 
+
 def upload_user_image_to(instance,file_name):
     return f"profile_photos/{instance.user.username}/{file_name}"
 
@@ -31,10 +33,12 @@ class UserProfile(models.Model):
     last_name = models.CharField(max_length=50, null=True, blank=True)
     address = models.TextField(null=True, blank=True)
     phone_number = models.BigIntegerField(null=True, blank=True)
+    profession = models.CharField(max_length=100, null=True, blank=True)
     photo = models.ImageField(null=True, blank=True, upload_to=upload_user_image_to)
     resume = models.FileField(null=True, blank=True, upload_to=upload_user_resume_to)
     date_of_birth = models.DateTimeField(null=True, blank=True)
-    about = models.TextField(blank=True, null=True)
+    about = RichTextField(null=True, blank=True)
+    joined = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.user.username
@@ -65,6 +69,7 @@ class Experience(models.Model):
     role = models.CharField(max_length=60)
     started_work_from = models.DateTimeField()
     worked_till = models.DateTimeField()
+    work_description = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return  self.role
