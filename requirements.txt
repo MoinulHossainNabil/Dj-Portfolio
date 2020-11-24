@@ -4,3 +4,4 @@ django-crispy-forms==1.9.1
 Pillow==7.1.1
 requests==2.23.0
 python-decouple==3.3
+django-ckeditor==6.0.0

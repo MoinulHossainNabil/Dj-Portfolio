@@ -84,7 +84,7 @@ SQLITE_CONFIG = {
 }
 
 DATABASES = {
-    'default': POSTGRES_CONFIG
+    'default': SQLITE_CONFIG
 }
 
 AUTH_PASSWORD_VALIDATORS = [
