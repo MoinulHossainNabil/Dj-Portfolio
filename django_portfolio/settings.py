@@ -114,9 +114,9 @@ USE_TZ = True
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = '/portfolio/user_profile'
+LOGIN_REDIRECT_URL = '/portfolio/user_profile/'
 
-ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = "/static/"
