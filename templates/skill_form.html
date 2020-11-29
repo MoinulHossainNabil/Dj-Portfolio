@@ -77,7 +77,8 @@
       const csrf_token = getCSRFToken('csrftoken');
       const taskList = document.querySelector("#task_list");
       let addedTasks = taskList.querySelectorAll("li");
-      const url = "http://127.0.0.1:8000/portfolio/add-skill/";
+      const host = "{{host}}"
+      const url = `http://${host}/portfolio/add-skill/`;
       let data = [];
       for(let task of addedTasks) {
         data.push(task.firstChild.textContent);

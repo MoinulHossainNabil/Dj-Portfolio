@@ -124,7 +124,7 @@ class AddSkillView(LoginRequiredMixin, View):
 
     def get(self, *args, **kwargs):
         data = Skill.objects.filter(user=self.request.user).order_by('-id')
-        return render(self.request, 'skill_form.html', {"data": data})
+        return render(self.request, 'skill_form.html', {"data": data, "host": self.request.get_host()})
 
 
 class AddProjectView(LoginRequiredMixin, CreateView):
