@@ -37,13 +37,20 @@ class HomeView(View):
         user = str(self.request.user)
         profile_qs = None
         context = {}
-        if user == "AnonymousUser":
+        if kwargs.get('user_name'):
+            try:
+                user = User.objects.get(username=kwargs.get('user_name')).id
+                profile_qs = UserProfile.objects.filter(user__id=user)[0]
+            except ObjectDoesNotExist:
+                messages.warning(self.request, "No Such user")
+                return redirect('portfolio_app:home')
+        elif user == "AnonymousUser":
             user = 1
             profile_qs = UserProfile.objects.filter(user__id=user)[0]
         else:
             user = self.request.user
             profile_qs = UserProfile.objects.filter(user__id=user.id)[0]
-        education_qs = Education.objects.filter(user=user)
+        education_qs = Education.objects.filter(user=user).order_by('degree')
         experience_qs = Experience.objects.filter(user=user)
         professional_project_qs = Project.objects.filter(user=user, project_type="P1")
         personal_project_qs = Project.objects.filter(user=user, project_type="P2")
@@ -65,39 +72,6 @@ class HomeView(View):
         return render(self.request, 'index.html', context)
 
 
-class UserHomeView(View):
-    def get(self, *args, **kwargs):
-        context = {}
-        user_object = User.objects.filter(username=kwargs.get('user_name'))
-        if user_object.exists():
-            user = user_object[0]
-            profile_qs = UserProfile.objects.filter(user__username=user)[0]
-            education_qs = Education.objects.filter(user__username=user)
-            experience_qs = Experience.objects.filter(user__username=user)
-            professional_project_qs = Project.objects.filter(user__username=user, project_type="P1")
-            personal_project_qs = Project.objects.filter(user__username=user, project_type="P2")
-            skill_qs = Skill.objects.filter(user__username=user)
-            profile_link_qs = ProfileLink.objects.filter(user__username=user)
-            context['has_education'] = HomeView.has_section(education_qs)
-            context['has_experience'] = HomeView.has_section(experience_qs)
-            context['has_professional_project'] = HomeView.has_section(professional_project_qs)
-            context['has_personal_project'] = HomeView.has_section(personal_project_qs)
-            context['has_skill'] = HomeView.has_section(skill_qs)
-            context['has_profile_link'] = HomeView.has_section(profile_link_qs)
-            context['profile'] = profile_qs
-            context['education'] = education_qs
-            context['experience'] = experience_qs
-            context['professional_project'] = professional_project_qs
-            context['personal_project'] = personal_project_qs
-            context['skill'] = skill_qs
-            context['profile_link'] = profile_link_qs
-
-        else:
-            messages.warning(self.request, "User does not exist")
-            return redirect('portfolio_app:home')
-        return render(self.request, 'index.html', context)
-
-
 class UserProfileView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         context = {}
@@ -113,14 +87,6 @@ class UserProfileView(LoginRequiredMixin, View):
         context['user_project'] = personal_project_qs
         context['user_skill'] = skill_qs
         context['user_profile_link'] = profile_link_qs
-        temp_list = [
-            'Python', 'C programming', 'java',
-            'C++', 'Django', 'Flask', 'Django Rest Framework',
-            'Flask Rest Api', 'HTML', 'CSS', 'Bootstrap', 'React js',
-            'Windows', 'Linux', 'Beautifulsoup', 'Machine Learning', 'Amazon Web Services',
-            'Mysql', 'Postgre', 'SQLite', 'S3 Bucket', 'Ec2', 'Python Boto3 Sdk'
-            ]
-        context['temp_list'] = temp_list
         return render(self.request, 'profile/user_profile.html', context)
 
 

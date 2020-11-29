@@ -14,6 +14,24 @@ PROJECT_TYPE = (
     ('P2', 'Personal Project')
 )
 
+DEGREE = (
+    ('1', 'Master of Science'),
+    ('2', 'Bachelor of Science'),
+    ('3', 'Higher Secondary Certificate'),
+    ('4', 'Secondary School Certificate'),
+    ('5', 'Others')
+)
+
+MAJOR = (
+    ('CSE', 'Computer Science & Engineering'),
+    ('EEE', 'Electronic & Electronics Engineering'),
+    ('CE', 'Civil Enginerring'),
+    ('BBA', 'Bachelor In Business Administratioin'),
+    ('SCI', 'Science'),
+    ('COM', 'Commerce'),
+    ('ARTS', 'ARTS'),
+    ('O', 'Others')
+)
 
 def upload_project_image_to(instance, file_name):
     return f"{instance.project_type}/{instance.title}/{file_name}"
@@ -49,8 +67,8 @@ class UserProfile(models.Model):
 
 class Education(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='persons_education')
-    degree = models.CharField(max_length=100, null=True)
-    major = models.CharField(max_length=60, null=True)
+    degree = models.CharField(max_length=100, choices=DEGREE, null=True)
+    major = models.CharField(max_length=100, choices=MAJOR, null=True)
     institute = models.CharField(max_length=100)
     pass_year = models.PositiveIntegerField()
     cgpa = models.DecimalField(max_digits=3, decimal_places=2)
