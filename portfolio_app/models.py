@@ -113,7 +113,7 @@ class Project(models.Model):
     image = models.ImageField(upload_to=upload_project_image_to, null=True)
     project_type = models.CharField(max_length=30, choices=PROJECT_TYPE)
     used_technologies = models.TextField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
+    description = RichTextField(blank=True, null=True)
     project_link = models.URLField(blank=True, null=True)
     code_link = models.URLField(blank=True, null=True)
 

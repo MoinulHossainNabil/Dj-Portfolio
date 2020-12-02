@@ -18,7 +18,7 @@
                               aria-expanded="true"
                               aria-controls="collapse_user_education_{{education.id}}"
                             >
-                              {{education.degree}}
+                              {{education.get_degree_display}}
                             </button>
                           </h2>
                         </div>
@@ -30,7 +30,28 @@
                           data-parent="#accordion_user_education_id"
                         >
                           <div class="card-body">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum, necessitatibus. Nostrum ad quam officiis maxime, eius ullam dolores esse! Adipisci!
+                            <p class="card-title">
+                              Major: <strong>{{education.get_major_display}}</strong>
+                            </p>
+                            <p class="card-title">
+                              Institue:
+                              <strong class="font-weigth-bold"
+                                >{{education.institute}}</strong
+                              >
+                            </p>
+                            <p class="card-title">
+                              Pass Year:
+                              <strong class="font-weigth-bold"
+                                >{{education.pass_year}}</strong
+                              >
+                            </p>
+                            <p class="card-title">
+                              Result:
+                              <strong class="font-weigth-bold"
+                                >{{education.cgpa}} out of
+                                {{education.get_out_of_display}}</strong
+                              >
+                            </p>
                             <a href="{% url 'portfolio_app:update-education' pk=education.id %}" role="button" class="btn btn-primary">Update</a>
                           </div>
                         </div>

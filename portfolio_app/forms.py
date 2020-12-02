@@ -36,7 +36,8 @@ class ExperienceForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['company_name'].widget.attrs.update({"placeholder": "Enter company name"})
         self.fields['role'].widget.attrs.update({"placeholder": "Enter role"})
-
+        self.fields['started_work_from'].widget.attrs.update({"placeholder": "Format YY-MM-DD i.e. 2020-01-01"})
+        self.fields['worked_till'].widget.attrs.update({"placeholder": "Format YY-MM-DD i.e. 2020-01-01"})
     class Meta:
         model = Experience
         fields = ('company_name', 'role', 'work_description', 'started_work_from', 'worked_till')

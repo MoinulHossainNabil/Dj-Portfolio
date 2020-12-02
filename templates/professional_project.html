@@ -7,13 +7,13 @@
             {% for project in professional_project_qs %}
             <div class="col-md-6 mb-3 pl-0">
                 <div class="card">
-                    <div class="card-header text-center">
+                    <div class="card-header text-center text-white" style="background-color: #2F4F4F;">
                         <h4 class="lead text-capitalize">
                         {{project.title}}
                         </h4>
                     </div>
                     <div class="card-body text-center">
-                        <h4 class="card-title lead text-capitalize">Key Technologies</h4>
+                        <h4 class="card-title lead text-capitalize font-weight-bold">Key Technologies</h4>
                         {% if project.used_technologies %}
                         <p class="lead font-weight-normal card-text pt-1 m-0 text-capitalize">{{project.used_technologies}}</p>
                         {% endif %}
@@ -42,19 +42,21 @@
           <div class="modal-content">
             <div class="container">
               <div class="row mt-3 px-2">
-                <div>
-                  <h4>{{project.title}}</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore, nihil?
-                  </p>
+                <div class="col-md-12">
+                  <div class="card col-12 p-0 mb-2">
+                      <div class="card-header">
+                        <h4 class="card-title text-center">{{project.title}}</h4>
+                      </div>
+                      <div class="card-body text-justify">
+                        <h4 class="card-title">{{project.title}}</h4>
+                        {{project.description|safe}}
+                        <h4>Technologies Used</h4>
+                        <p>{{project.used_technologies}}</p>
+                      </div>
+                  </div>
                 </div>
               </div>
-              <div class="row mt-3 px-2">
-                <div>
-                  <h4>Technologies Used</h4>
-                  <p>{{project.used_technologies}}</p>
-                </div>
-              </div>
+              
             </div>
             <div class="modal-footer">
               <button
