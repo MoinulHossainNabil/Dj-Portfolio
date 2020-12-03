@@ -1,10 +1,15 @@
+<style>
+    #About .about-info p {
+        margin-bottom: .5rem;
+    }
+</style>
 <section id="About" class="content-section">
     <div class="container">
         <div class="row">
             {% include 'heading.html' with title_name="About Me" icon="fa-user" %}
         </div>
         <div class="row">
-            <div class="col-md-9 mx-0 px-0 text-justify">
+            <div class="col-md-9 mx-0 px-0 text-justify about-info">
                   {{about|safe}}
             </div>
         </div>

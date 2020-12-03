@@ -3,6 +3,8 @@
 {% endblock %}
 {% block content %}
 
+<div class="container">
+        
 <!--Personal Information -->
 
 {% include 'profile/user_personal_info.html'  with user_profile_qs=user_profile title="Personal Information"%}
@@ -28,3 +30,5 @@
 {% include 'profile/user_profilelink.html' with user_profilelink_qs=user_profile_link title="Profile Links" %}
 
 {% endblock content %}
+ 
+</div>
