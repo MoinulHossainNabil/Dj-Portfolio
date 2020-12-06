@@ -84,7 +84,7 @@
             <ul class="list-unstyled d-flex flex-column justify-content-center">
                 {% if profile_link_qs %} {% for link in profile_link_qs %}
                 <li>
-                  <a href="{{link.link}}" class="profile-link">
+                  <a href="{{link.link}}" target="_blank" class="profile-link">
                     <i class="fa fa-globe"></i>&nbsp;{{link.link}}
                   </a>
                 </li>
