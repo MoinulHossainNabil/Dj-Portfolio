@@ -21,7 +21,7 @@ app_name = 'portfolio_app'
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
-    path('user/<str:user_name>/', HomeView.as_view(), name='user-home'),
+    path('user/', HomeView.as_view(), name='user-home'),
     path('user_profile/', UserProfileView.as_view(), name='profile'),
     path('add-education/', AddEducationView.as_view(), name='education'),
     path('add-experience/', AddExperienceView.as_view(), name='experience'),

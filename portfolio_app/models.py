@@ -29,7 +29,7 @@ MAJOR = (
     ('BBA', 'Bachelor In Business Administratioin'),
     ('SCI', 'Science'),
     ('COM', 'Commerce'),
-    ('ARTS', 'ARTS'),
+    ('ARTS', 'Arts'),
     ('O', 'Others')
 )
 

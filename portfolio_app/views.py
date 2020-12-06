@@ -1,4 +1,5 @@
 import json
+from django.conf import settings
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
@@ -27,6 +28,8 @@ from .forms import (
     ProfileLinkForm
 )
 
+DEFAULT_USER = settings.DEFAULT_USER_ID
+
 
 class HomeView(View):
     @staticmethod
@@ -37,15 +40,15 @@ class HomeView(View):
         user = str(self.request.user)
         profile_qs = None
         context = {}
-        if kwargs.get('user_name'):
+        if self.request.GET.get('user_name'):
             try:
-                user = User.objects.get(username=kwargs.get('user_name')).id
+                user = User.objects.get(username=self.request.GET.get('user_name')).id
                 profile_qs = UserProfile.objects.filter(user__id=user)[0]
             except ObjectDoesNotExist:
-                messages.warning(self.request, "No Such user")
+                messages.warning(self.request, "None Found With The Given Username")
                 return redirect('portfolio_app:home')
         elif user == "AnonymousUser":
-            user = 1
+            user = DEFAULT_USER
             profile_qs = UserProfile.objects.filter(user__id=user)[0]
         else:
             user = self.request.user

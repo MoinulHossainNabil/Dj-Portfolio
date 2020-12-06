@@ -1,23 +1,40 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+<style>
+  #skillInput .form-control:focus {
+    box-shadow: none;
+  }
+</style>
 <div class="container">
-    <h4>Skills</h4>
     <form id="task_form" method="post">
         {% csrf_token %}
-      <input type="text" id="new_task" placeholder="Add a new skill" required/>
-      <input type="submit" value="Add Skill" />
+        <div class="row justify-content-center mt-4" id="skillInput">
+          <div class="col-md-6">
+            <input class="form-control my-2" type="text" id="new_task" placeholder="Add a new skill" required/>
+            <input class="btn btn-success btn-block" type="submit" value="Add Skill" />
+          </div>
+        </div>
     </form>
-    <h4>Added Skills</h4>
-    <ul id="task_list"></ul>
-    <button id="submit_task">Save</button>
+    <div class="row justify-content-center my-3">
+      <div class="col-md-6 justify-content-center">
+        <h4 class="my-3 text-center">Added Skills</h4>
+        <ul class="text-center list-group-flush" id="task_list"></ul>
+        <button class="btn btn-outline-primary btn-block" id="submit_task">Update Skills</button>
+      </div>
+    </div>
+    <br>
     <hr />
-    <h4>Current Skills</h4>
-    <ul>
-      {% for task in data %}
-      <li>{{task}}</li>
-      {% endfor %}
-    </ul>
+    <div class="row justify-content-center my-3">
+      <div class="col-md-6 justify-content-center">
+        <h4 class="my-3 text-center">Current Skills</h4>
+        <ul class="list-group">
+          {% for task in data %}
+          <li class="list-group-item">{{task}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
   </div>
 
   {% block extra_scritps %}
@@ -39,6 +56,7 @@
         event.preventDefault();
         let task = new_task.value;
         let element = document.createElement("li");
+        element.setAttribute('class', 'list-group-item my-1');
         element.appendChild(document.createTextNode(task + " "));
         let delete_link = document.createElement("a");
         delete_link.setAttribute("href", "#");

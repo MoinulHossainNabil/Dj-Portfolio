@@ -152,3 +152,6 @@ EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
+
+# The main portfolio/homepage will be rendred with this user id
+DEFAULT_USER_ID = 1

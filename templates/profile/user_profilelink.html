@@ -6,22 +6,20 @@
         <div class="row">
             {% for link in user_profilelink_qs %}
             <div class="col-12">
-                <p class="lead">
-                    {{link.link_site}}: <a href="" class="text-decoration-none">{{link.link}}</a>
-                    <a class="text-decoration-none text-danger" href="{% url 'portfolio_app:update-profilelink' pk=link.id %}">
-                        Update Link
-                      </a>
-                </p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        {{link.link_site}}: <a href="{{link.link}}" class="text-decoration-none" target="_blank">{{link.link}}</a>
+                        <a class="text-decoration-none text-danger" href="{% url 'portfolio_app:update-profilelink' pk=link.id %}">
+                            Update Link
+                          </a>
+                        </li>
+                </ul>
             </div>
             {% endfor %}
-            <div class="col-12 mt-4">
-                <div class="card col-6 p-0 m-auto">
-                    <div class="card-header bg-dark text-center text-light">
-                      <a class="btn bg-dark btn-lg text-white" href="{% url 'portfolio_app:profilelink' %}" role="button">
-                          Add New Links
-                      </a>
-                    </div>
-                  </div>
+            <div class="col-12 mt-4 text-center">
+                <a class="btn btn-primary btn-md" href="{% url 'portfolio_app:profilelink' %}" role="button">
+                    Add New Links
+                </a>
             </div>
         </div>
         

@@ -30,5 +30,23 @@
 {% include 'profile/user_profilelink.html' with user_profilelink_qs=user_profile_link title="Profile Links" %}
 
 {% endblock content %}
+
+{% block extra_scripts %}
+<script>
+    const searchIcon = document.getElementById('searchIcon');
+    const searchForm = document.getElementById('searchForm');
+    searchIcon.addEventListener('click', function() {
+        searchForm.classList.toggle('search-form-show');
+        let icon = searchIcon.firstChild;
+        if(icon.classList.contains('fa-search')) {
+            icon.classList.replace('fa-search', 'fa-times');
+        }
+        else {
+            icon.classList.replace('fa-times', 'fa-search');
+        }
+    })
+    
+</script>
+{% endblock extra_scripts %}
  
 </div>

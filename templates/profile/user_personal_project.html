@@ -14,7 +14,7 @@
                       <h4 class="card-title">{{personal_project.title}}</h4>
                       {{personal_project.description|safe}}
                       <div class="text-center mt-2">
-                        <a href="{% url 'portfolio_app:update-project' pk=personal_project.id %}" class="btn btn-primary btn-md text-center px-5">Update Information</a>
+                        <a href="{% url 'portfolio_app:update-project' pk=personal_project.id %}" class="btn btn-primary btn-md text-center">Update Information</a>
                       </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
               <div class="col-12">
                 <div class="card col-12 p-0">
                     <div class="card-header text-center">
-                      <a class="btn btn-primary btn-lg" href="{% url 'portfolio_app:project' %}" role="button">
+                      <a class="btn btn-primary btn-md" href="{% url 'portfolio_app:project' %}" role="button">
                           Add New Project
                       </a>
                     </div>
