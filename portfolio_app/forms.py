@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserProfile, Education, Experience, Skill, Project, ProfileLink
+from .models import UserProfile, Education, Experience, Skill, Project, ProfileLink, Certification
 
 
 class UserProfileForm(forms.ModelForm):
@@ -87,3 +87,14 @@ class ProfileLinkForm(forms.ModelForm):
             'link',
             'link_site',
         )
+
+
+class CertificationForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({"placeholder": "Enter the certification title"})
+
+    class Meta:
+        model = Certification
+        fields = ('title', )
+

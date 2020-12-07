@@ -55,6 +55,12 @@
         {% include 'skill.html'  with skill_qs=skill %}
         {% endif %}
 
+        <!-- Certification Section-->
+
+        {% if has_certification %}
+        {% include 'certification.html'  with certification_qs=certification %}
+        {% endif %}
+
         <!-- Contact Section -->
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

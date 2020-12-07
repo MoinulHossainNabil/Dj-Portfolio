@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 m-auto">
+      {% if  form.instance.pk%}
+      <h4 class="text-center form-heading">Update Certification</h4>
+      {% else %}
+      <h4 class="text-center form-heading">Add Certification</h4>
+      {% endif %}
+        {% include 'form.html' %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -4,34 +4,26 @@ from django.shortcuts import reverse
 from django.db.models import signals
 from ckeditor.fields import RichTextField
 
-CGPA_OUT_OF = (
-    ('Four', '4.0'),
-    ('Five', '5.0')
-)
-
 PROJECT_TYPE = (
     ('P1', 'Professional Project'),
     ('P2', 'Personal Project')
 )
 
 DEGREE = (
-    ('1', 'Master of Science'),
-    ('2', 'Bachelor of Science'),
-    ('3', 'Higher Secondary Certificate'),
-    ('4', 'Secondary School Certificate'),
-    ('5', 'Others')
+    ('2.1', 'Masters Degree'),
+    ('2.2', 'Master of Science'),
+    ('3.1', 'Bachelor Degree'),
+    ('3.2', 'Bachelor of Science'),
+    ('3.3', 'Bachelor in Business Administration'),
+    ('3.4', 'Bachelor in Arts'),
+    ('4.1', 'Diploma Degree'),
+    ('5.1', 'Higher Secondary Certificate'),
+    ('5.2', 'A Level'),
+    ('6.1', 'Secondary School Certificate'),
+    ('6.2', 'O Level'),
+    ('7.1', 'Others')
 )
 
-MAJOR = (
-    ('CSE', 'Computer Science & Engineering'),
-    ('EEE', 'Electronic & Electronics Engineering'),
-    ('CE', 'Civil Enginerring'),
-    ('BBA', 'Bachelor In Business Administratioin'),
-    ('SCI', 'Science'),
-    ('COM', 'Commerce'),
-    ('ARTS', 'Arts'),
-    ('O', 'Others')
-)
 
 def upload_project_image_to(instance, file_name):
     return f"{instance.project_type}/{instance.title}/{file_name}"
@@ -68,14 +60,14 @@ class UserProfile(models.Model):
 class Education(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='persons_education')
     degree = models.CharField(max_length=100, choices=DEGREE, null=True)
-    major = models.CharField(max_length=100, choices=MAJOR, null=True)
+    major = models.CharField(max_length=100, null=True)
     institute = models.CharField(max_length=100)
     pass_year = models.PositiveIntegerField()
-    cgpa = models.DecimalField(max_digits=3, decimal_places=2)
-    out_of = models.CharField(max_length=4, choices=CGPA_OUT_OF)
+    cgpa = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
+    out_of = models.CharField(max_length=5, null=True, blank=True)
 
     def __str__(self):
-        return str(self.degree)
+        return self.get_degree_display()
 
     def get_absolute_url(self):
         return reverse('portfolio_app:profile')
@@ -131,6 +123,17 @@ class ProfileLink(models.Model):
 
     def __str__(self):
         return self.link
+
+    def get_absolute_url(self):
+        return reverse('portfolio_app:profile')
+
+
+class Certification(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    title = models.TextField()
+
+    def __str__(self):
+        return self.title
 
     def get_absolute_url(self):
         return reverse('portfolio_app:profile')
