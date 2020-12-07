@@ -72,11 +72,19 @@
           {% endif %}
           <div class="card-body">
             <h5 class="lead card-title font-weight-bold">Tehcnologies</h5>
+            {% if project.used_technologies %}
             <p
               class="lead font-weight-normal card-text p-0 m-0 text-capitalize"
             >
               {{project.used_technologies}}
             </p>
+            {% else %}
+            <p
+              class="lead font-weight-normal card-text p-0 m-0 text-capitalize"
+            >
+              Not Specified
+            </p>
+            {% endif %}
             <div class="mt-2">
                 <a
               data-toggle="modal"
@@ -127,7 +135,6 @@
                 >
                   Close
                 </button>
-                <!-- <button type="button" class="btn btn-primary">Send message</button> -->
               </div>
             </div>
           </div>
@@ -161,10 +168,17 @@
                         <h4 class="card-title text-center">{{project.title}}</h4>
                       </div>
                       <div class="card-body">
-                        <h4 class="card-title">{{personal_project.title}}</h4>
+                        {% if project.description %}
                         {{project.description|safe}}
-                        <h4>Technologies Used</h4>
-                        <p>{{project.used_technologies}}</p>
+                        {% else %}
+                        <p class="lead">No Description Provided</p>
+                        {% endif %}
+                        <h4 class="mt-4 card-title">Technologies Used</h4>
+                        {% if project.used_technologies %}
+                        <p class="lead card-text pl-1">{{project.used_technologies}}</p>
+                        {% else %}
+                        <p class="lead card-text pl-1">Not Specified</p>
+                        {% endif %}
                       </div>
                   </div>
                   </div>
