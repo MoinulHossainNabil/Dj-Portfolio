@@ -3,6 +3,8 @@
 {% endblock %}
 {% block content %}
 
+<div class="container">
+        
 <!--Personal Information -->
 
 {% include 'profile/user_personal_info.html'  with user_profile_qs=user_profile title="Personal Information"%}
@@ -23,8 +25,32 @@
 
 {% include 'profile/user_skill.html' with user_skill_qs=user_skill title="Technical Skills" %}
 
+<!-- Certification Section -->
+
+{% include 'profile/user_certification.html' with user_certifications_qs=user_certification title="Certifications" %}
+
 <!-- Prfile Link Section -->
 
 {% include 'profile/user_profilelink.html' with user_profilelink_qs=user_profile_link title="Profile Links" %}
 
 {% endblock content %}
+
+{% block extra_scripts %}
+<script>
+    const searchIcon = document.getElementById('searchIcon');
+    const searchForm = document.getElementById('searchForm');
+    searchIcon.addEventListener('click', function() {
+        searchForm.classList.toggle('search-form-show');
+        let icon = searchIcon.firstChild;
+        if(icon.classList.contains('fa-search')) {
+            icon.classList.replace('fa-search', 'fa-times');
+        }
+        else {
+            icon.classList.replace('fa-times', 'fa-search');
+        }
+    })
+    
+</script>
+{% endblock extra_scripts %}
+ 
+</div>

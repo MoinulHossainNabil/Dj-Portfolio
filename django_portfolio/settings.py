@@ -10,7 +10,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'nabil.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'nabilmoiun.pythonanywhere.com']
 
 # Application definition
 
@@ -84,7 +84,7 @@ SQLITE_CONFIG = {
 }
 
 DATABASES = {
-    'default': POSTGRES_CONFIG
+    'default': SQLITE_CONFIG
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -114,9 +114,9 @@ USE_TZ = True
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = '/portfolio/user_profile'
+LOGIN_REDIRECT_URL = '/portfolio/user_profile/'
 
-ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = "/static/"
@@ -152,3 +152,6 @@ EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
+
+# The main portfolio/homepage will be rendred with this user id
+DEFAULT_USER_ID = 1

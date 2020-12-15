@@ -4,3 +4,8 @@ django-crispy-forms==1.9.1
 Pillow==7.1.1
 requests==2.23.0
 python-decouple==3.3
+django-ckeditor==6.0.0
+django-cors-headers==3.4.0
+django-cleanup==5.1.0
+django-mathfilters==1.0.0
+

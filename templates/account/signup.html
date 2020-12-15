@@ -20,7 +20,7 @@
   <div class="row mt-4 justify-content-center">
     <div class="col-md-8">
     <h3>{% trans "Sign Up" %}</h3>
-    <p class="lead">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+    <p class="lead">{% blocktrans %}Already have an account? Then please <a class="font-weight-bold" href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
     </div>
     <form class="signup col-md-8" id="signup_form" method="post" action="{% url 'account_signup' %}">
       {% csrf_token %}

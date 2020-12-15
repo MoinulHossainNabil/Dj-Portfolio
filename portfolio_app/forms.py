@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserProfile, Education, Experience, Skill, Project, ProfileLink
+from .models import UserProfile, Education, Experience, Skill, Project, ProfileLink, Certification
 
 
 class UserProfileForm(forms.ModelForm):
@@ -36,7 +36,8 @@ class ExperienceForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['company_name'].widget.attrs.update({"placeholder": "Enter company name"})
         self.fields['role'].widget.attrs.update({"placeholder": "Enter role"})
-
+        self.fields['started_work_from'].widget.attrs.update({"placeholder": "Format YY-MM-DD i.e. 2020-01-01"})
+        self.fields['worked_till'].widget.attrs.update({"placeholder": "Format YY-MM-DD i.e. 2020-01-01"})
     class Meta:
         model = Experience
         fields = ('company_name', 'role', 'work_description', 'started_work_from', 'worked_till')
@@ -86,3 +87,14 @@ class ProfileLinkForm(forms.ModelForm):
             'link',
             'link_site',
         )
+
+
+class CertificationForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({"placeholder": "Enter the certification title"})
+
+    class Meta:
+        model = Certification
+        fields = ('title', )
+

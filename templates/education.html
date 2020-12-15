@@ -19,7 +19,7 @@
             <div class="card-header" id="heading_education_{{education.id}}" style="border-bottom: 0;">
               <h2 class="mb-0">
                 <button
-                  class="btn btn-link btn-block text-left text-decoration-none text-dark"
+                  class="btn btn-link btn-block text-left text-decoration-none text-dark accordionBtn"
                   type="button"
                   data-toggle="collapse"
                   data-target="#collapse_education_{{education.id}}"
@@ -27,18 +27,30 @@
                   aria-controls="collapse_education_{{education.id}}"
                   style="font-size: large;"
                 >
-                  {{education.degree}}
+                  {{education.get_degree_display}}
+                  {% if forloop.first %}
+                  <i class="fa fa-chevron-up"></i>
+                  {% else %}
                   <i class="fa fa-chevron-down"></i>
+                  {% endif %}
                 </button>
               </h2>
             </div>
-
+            {% if forloop.first %}
+            <div
+              id="collapse_education_{{education.id}}"
+              class="collapse show"
+              aria-labelledby="heading_education_{{education.id}}"
+              data-parent="#accordion_education_id"
+            >
+            {% else %}
             <div
               id="collapse_education_{{education.id}}"
               class="collapse"
               aria-labelledby="heading_education_{{education.id}}"
               data-parent="#accordion_education_id"
             >
+            {% endif %}
               <div class="card-body">
                 <p class="card-title">
                   Major: <strong>{{education.major}}</strong>
@@ -50,7 +62,7 @@
                   >
                 </p>
                 <p class="card-title">
-                  Pass Year
+                  Pass Year:
                   <strong class="font-weigth-bold"
                     >{{education.pass_year}}</strong
                   >
@@ -59,7 +71,7 @@
                   Result:
                   <strong class="font-weigth-bold"
                     >{{education.cgpa}} out of
-                    {{education.get_out_of_display}}</strong
+                    {{education.out_of}}</strong
                   >
                 </p>
               </div>

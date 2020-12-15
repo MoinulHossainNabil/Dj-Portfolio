@@ -1,0 +1,27 @@
+<section id="user_certification">
+    <div class="container">
+        <div class="row justify-content-center">
+            {% include 'profile/title.html' with title_name=title %}
+          </div>
+        <div class="row">
+            <div class="col-12">
+                <ul class="list-group list-group-flush">
+                    {% for certificate in user_certifications_qs %}
+                    <li class="list-group-item">
+                        {{certificate.title}}
+                        <a class="text-decoration-none text-danger" href="{% url 'portfolio_app:update-certification' pk=certificate.id %}">
+                            Update Certification
+                          </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-12 mt-4 text-center">
+                <a class="btn btn-primary btn-md" href="{% url 'portfolio_app:certification' %}" role="button">
+                    Add New Certifications
+                </a>
+            </div>
+        </div>
+        
+    </div>
+</section>

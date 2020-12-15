@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 {% load date_difference %}
+{% block extra_heads %}
+<style>
+    #menuID .show-active a {
+        color: white !important;
+    }
+</style>
+{% endblock extra_heads %}
 {% block content %}
 
     <div class="container-fluid">
@@ -48,6 +55,12 @@
         {% include 'skill.html'  with skill_qs=skill %}
         {% endif %}
 
+        <!-- Certification Section-->
+
+        {% if has_certification %}
+        {% include 'certification.html'  with certification_qs=certification %}
+        {% endif %}
+
         <!-- Contact Section -->
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -87,6 +100,34 @@
 
 {% endblock content %}
 {% block extra_scripts %}
+<script>
+    const searchIcon = document.getElementById('searchIcon');
+    const searchForm = document.getElementById('searchForm');
+    searchIcon.addEventListener('click', function() {
+        searchForm.classList.toggle('search-form-show');
+        let icon = searchIcon.firstChild;
+        if(icon.classList.contains('fa-search')) {
+            icon.classList.replace('fa-search', 'fa-times');
+        }
+        else {
+            icon.classList.replace('fa-times', 'fa-search');
+        }
+    })
+</script>
+<script>
+    const menu = document.getElementById('menuID');
+    const items = menu.getElementsByClassName('nav-item');
+    for(let item of items) {
+        item.addEventListener('click', function() {
+            for(let i of items) {
+                if(i.classList.contains('active')) {
+                    i.classList.remove('active');
+                }
+            }
+            item.classList.add('active');
+        })
+    }
+</script>
 <!-- <script src="https://unpkg.com/scrollreveal"></script>
 <script>
     window.sr = ScrollReveal({duration: 1000});

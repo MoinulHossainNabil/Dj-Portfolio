@@ -1,0 +1,19 @@
+<section id="Certification" class="content-section">
+    <div class="container">
+        <div class="row">
+            {% include 'heading.html' with title_name="Certification" icon="fa-certificate" %}
+        </div>
+        <div class="row">
+            <div class="col-md-12 mx-0 px-0">
+                  <ul class="list-group" style="padding-left: 0rem;">
+                      {% for certificate in certification_qs %}
+                      <li class="list-group-item">
+                          {{certificate.title}}
+                      </li>
+                      {% endfor %}
+                  </ul>
+            </div>
+        </div>
+        
+    </div>
+</section>

@@ -27,6 +27,11 @@
         padding-top: 20px;
     }
   }
+  @media only screen and (max-width: 400px) {
+    .profile-info a {
+      font-size: small;
+    }
+  }
   @media only screen and (max-width:311px) {
       .name-profile-head, .role-profile-head {
           font-size: 1.45rem;
@@ -53,7 +58,7 @@
           {% if profile_qs.profession %}
           <h3 class="role-profile-head">{{profile_qs.profession}}</h3>
           {% endif %}
-          <ul class="list-unstyled pt-2">
+          <ul class="list-unstyled personal-head pt-2">
             {% if profile_qs.address %}
             <li>
               <a href="" class="text-decoration-none">
@@ -79,7 +84,7 @@
             <ul class="list-unstyled d-flex flex-column justify-content-center">
                 {% if profile_link_qs %} {% for link in profile_link_qs %}
                 <li>
-                  <a href="{{link.link}}" class="profile-link">
+                  <a href="{{link.link}}" target="_blank" class="profile-link">
                     <i class="fa fa-globe"></i>&nbsp;{{link.link}}
                   </a>
                 </li>

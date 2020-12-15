@@ -5,7 +5,8 @@ from .models import (
     Experience,
     Skill,
     Project,
-    ProfileLink
+    ProfileLink,
+    Certification
 )
 
 admin.site.register(UserProfile)
@@ -14,4 +15,4 @@ admin.site.register(Experience)
 admin.site.register(Skill)
 admin.site.register(Project)
 admin.site.register(ProfileLink)
-
+admin.site.register(Certification)
