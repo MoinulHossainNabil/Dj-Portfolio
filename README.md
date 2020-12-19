@@ -10,7 +10,7 @@ I have shown my portfolio by default but when a user will sign up and build thei
 search for all available users' profile/portfolio who will be using this system.
 
 I have deployed the project on pythonanywhere. You can view the full app on this link [nabilmoiun.pythonanywhere.com/portfolio/](http://nabilmoiun.pythonanywhere.com/portfolio/)
-to check out my work.
+to check out my work and create your own profile by using it.
 
 # Technology
 
