@@ -14,5 +14,5 @@ to check out my work and create your own profile by using it.
 
 # Technology
 
-Python, Django, HTML, CSS, Bootstrap, Javascript
+Python, Django, HTML, CSS, Bootstrap, Javascript, Sqlite
 
