@@ -1,16 +1,18 @@
 import json
 from django.conf import settings
-from django.shortcuts import render, redirect
-from django.core.mail import send_mail
-from django.urls import reverse_lazy
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
-from django.utils.decorators import method_decorator
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import View, CreateView, UpdateView, DeleteView
 from django.http import JsonResponse
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+
+from django.views.generic import View, CreateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+
 from django.contrib.auth.models import User
+
 from .models import (
     UserProfile,
     Education,
@@ -19,15 +21,6 @@ from .models import (
     Project,
     ProfileLink,
     Certification
-)
-from .forms import (
-    UserProfileForm,
-    EducationForm,
-    ExperienceForm,
-    SkillForm,
-    ProjectForm,
-    ProfileLinkForm,
-    CertificationForm
 )
 
 DEFAULT_USER = settings.DEFAULT_USER_ID
@@ -100,24 +93,10 @@ class UserProfileView(LoginRequiredMixin, View):
         return render(self.request, 'profile/user_profile.html', context)
 
 
-class AddEducationView(LoginRequiredMixin, CreateView):
-    model = Education
-    template_name = 'education_form.html'
-    form_class = EducationForm
-
+class AddInstanceView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(AddEducationView, self).form_valid(form)
-
-
-class AddExperienceView(LoginRequiredMixin, CreateView):
-    model = Experience
-    template_name = 'experience_form.html'
-    form_class = ExperienceForm
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(AddExperienceView, self).form_valid(form)
+        return super(AddInstanceView, self).form_valid(form)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -137,102 +116,10 @@ class AddSkillView(LoginRequiredMixin, View):
         return render(self.request, 'skill_form.html', {"data": data, "host": self.request.get_host()})
 
 
-class AddProjectView(LoginRequiredMixin, CreateView):
-    model = Project
-    template_name = 'project_form.html'
-    form_class = ProjectForm
-
+class UpdateInstance(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(AddProjectView, self).form_valid(form)
-
-
-class AddProfileLinkView(LoginRequiredMixin, CreateView):
-    model = ProfileLink
-    template_name = 'profilelink_form.html'
-    form_class = ProfileLinkForm
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(AddProfileLinkView, self).form_valid(form)
-
-
-class AddCertificationView(LoginRequiredMixin, CreateView):
-    model = Certification
-    template_name = 'certification_form.html'
-    form_class = CertificationForm
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(AddCertificationView, self).form_valid(form)
-
-
-class UpdateUserProfileView(LoginRequiredMixin, UpdateView):
-    model = UserProfile
-    template_name = 'user_profile_form.html'
-    form_class = UserProfileForm
-
-    def form_valid(self, form):
-        return super(UpdateUserProfileView, self).form_valid(form)
-
-
-class UpdateEducationView(LoginRequiredMixin, UpdateView):
-    model = Education
-    template_name = 'education_form.html'
-    form_class = EducationForm
-
-    def form_valid(self, form):
-        return super(UpdateEducationView, self).form_valid(form)
-
-
-class UpdateExperienceView(LoginRequiredMixin, UpdateView):
-    model = Experience
-    template_name = 'experience_form.html'
-    form_class = ExperienceForm
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(UpdateExperienceView, self).form_valid(form)
-
-
-class UpdateSkillView(LoginRequiredMixin, UpdateView):
-    pass
-
-
-class UpdateProjectView(LoginRequiredMixin, UpdateView):
-    model = Project
-    template_name = 'project_form.html'
-    form_class = ProjectForm
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(UpdateProjectView, self).form_valid(form)
-
-
-class UpdateProfileLinkView(LoginRequiredMixin, UpdateView):
-    model = ProfileLink
-    template_name = 'profilelink_form.html'
-    form_class = ProfileLinkForm
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(UpdateProfileLinkView, self).form_valid(form)
-
-
-class UpdateCertificationView(LoginRequiredMixin, UpdateView):
-    model = Certification
-    template_name = 'certification_form.html'
-    form_class = CertificationForm
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(UpdateCertificationView, self).form_valid(form)
-
-
-class DeleteSkillView(DeleteView):
-    model = Skill
-    success_url = reverse_lazy('/portfolio/user_profile/')
-    template_name = 'profile/delete_skill.html'
+        return super(UpdateInstance, self).form_valid(form)
 
 
 def delete_skill(request, pk):
@@ -260,4 +147,3 @@ class SendEmailView(View):
             fail_silently=False
         )
         return JsonResponse({"message": "Email has been sent successfully!!"})
-
