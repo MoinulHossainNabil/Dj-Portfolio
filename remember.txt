@@ -1,2 +1,0 @@
-postgree_first_passwrod = Nobody@1314
-postgree_second_password = django1234/django@1234
